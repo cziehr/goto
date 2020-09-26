@@ -16,9 +16,9 @@ function goto_redirect(which,mode) {
        which = which.replace(/user/, user);
       }
       location.href = which;
-      setGotoCookie("GOTO_LOGIN", "") ;
-     
- 
+
+      clearTimeout(goto_tm);
+      setGotoCookie("GOTO_LOGIN", "") ; 
 }
 function goto_getCookie(name) {
     var re = new RegExp(name + "=([^;]+)");
