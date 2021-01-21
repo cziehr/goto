@@ -1,7 +1,7 @@
 base goto
 author Allen Ormond,cziehr, turnermm
 email turnermm02@shaw.ca
-date 2020-09-26
+date 2021-01-21
 name GOTO
-desc Easily redirect to other pages in your wiki.
+desc Easily red>irect to other pages in your wiki.
 url https://www.dokuwiki.org/plugin:goto
