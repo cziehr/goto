@@ -40,7 +40,6 @@ class  syntax_plugin_goto extends DokuWiki_Syntax_Plugin {
                 if($matches[0] == 'user') {
                    $matches[0] = "user";  // wildcard replaced in javascript   goto_redirect()
                     $is_usr = 'user';
-                    setcookie("GOTO_LOGIN",":$userid" , time()+10, DOKU_BASE);
 					$seconds = 3;
                 }  
                 else if (preg_match("#^\s*https?:\/\/#",$matches[0])) {

@@ -21,6 +21,7 @@ class action_plugin_goto extends DokuWiki_Action_Plugin {
 		if(!$user) return;
 		$auto_login = $this->getConf('auto_login');	
         if(!$auto_login) {  
+          setcookie("GOTO_LOGIN",":$user" , time()+10, DOKU_BASE);
            return;	
         }
 
