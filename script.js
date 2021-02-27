@@ -35,13 +35,15 @@ function setGotoCookie(cname, cvalue) {
 
 jQuery( document ).ready(function() {
      if(JSINFO['update_version'] > 50) {
-      var domval = window.document.getElementById("goto_go").innerHTML;
-          var ar = domval.split(';');   
-      if(ar) {      
-         var url = ar[0]; var delay = ar[1];
-         setTimeout(function(){ location.href = url; }, delay,url);
-         return;
+      var domval = window.document.getElementById("goto_go");
+      if (domval && "innerHTML" in domval) {
+        var ar = domval.innerHTML.split(';');
+        if(ar) {
+          var url = ar[0]; var delay = ar[1];
+          setTimeout(function(){ location.href = url; }, delay,url);
+          return;
         }
+      }
       }
 	  var which = goto_getCookie("GOTO_LOGIN");      
   
