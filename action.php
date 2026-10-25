@@ -22,7 +22,7 @@ class action_plugin_goto extends DokuWiki_Action_Plugin {
 		 if($act != 'login') {
 				return;
 		}
-	    $user = $_SERVER['REMOTE_USER'];
+	    $user = $INPUT->server->str('REMOTE_USER');
 		if(!$user) return;
 		$auto_login = $this->getConf('auto_login');	
         if($auto_login) {  
@@ -31,16 +31,14 @@ class action_plugin_goto extends DokuWiki_Action_Plugin {
         }
         else return;
 
-        $which_only = $this->getConf('only_option');		
-		if($which_only == 'default') {
-		    $users_only = false;
-		    $groups_only = false;
-		}	
-		else if($which_only == 'group') {
-			$groups_only = true;
+		$which_only = $this->getConf('only_option');
+		$users_only = false;
+		$groups_only = false;
+		if($which_only == 'group') {
+		    $groups_only = true;
 		}
-		else  {
-			$users_only = true;
+		else if($which_only != 'default') {
+		    $users_only = true;
 		}
 		$redirect_target = "";
 		if(! $users_only) {			   
