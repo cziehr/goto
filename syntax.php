@@ -37,24 +37,26 @@ class  syntax_plugin_goto extends DokuWiki_Syntax_Plugin {
 				*  to the destination. %s will be replaced with the number of seconds before redirect. */
 				$message = "<strong>".$this->getLang('redirect')."</strong>";				
 				$matches = explode("?", substr($match,7,-2));
-                if($matches[0] == 'user') {
-                   $matches[0] = "user";  // wildcard replaced in javascript   goto_redirect()
-                    $is_usr = 'user';
-					$seconds = 3;
-                }  
-                else if (preg_match("#^\s*https?:\/\/#",$matches[0])) {
-                    $is_extern ='extern';                   
-                }
-              
+				$matches = array_pad($matches, 3, '');   // fill missing arguments with ''
+				
+				if($matches[0] == 'user') {
+				    $matches[0] = "user";  // wildcard replaced in javascript   goto_redirect()
+				    $is_usr = 'user';
+				    $seconds = 3;
+				}
+				else if (preg_match("#^\s*https?:\/\/#",$matches[0])) {
+				    $is_extern = 'extern';
+				}
+				
 				if (is_numeric($matches[1])){
-                    $seconds = $matches[1]; 
-                }
-               else if(!is_numeric($matches[1]) && $is_extern) {
-                     if (is_numeric($matches[2])){
-                       $seconds = $matches[2]; 
-                   }                   
-                    $matches[0] .= '?' . $matches[1];
-                }
+				    $seconds = $matches[1];
+				}
+				else if ($is_extern && $matches[1] !== '') {
+				    if (is_numeric($matches[2])){
+				        $seconds = $matches[2];
+				    }
+				    $matches[0] .= '?' . $matches[1];
+				}
 				if ($seconds < $minSeconds){ $seconds = $minSeconds; }//Check that seconds is greater than $minSeconds.
 				$message = str_replace("%D","%d",$message);//Make %d case insensitive.
 				$message = str_replace("%S","%s",$message);//Make %s case insensitive.
