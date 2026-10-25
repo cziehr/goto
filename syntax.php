@@ -91,7 +91,7 @@ class  syntax_plugin_goto extends DokuWiki_Syntax_Plugin {
                     if(!$data[3] && !$data[4]) {
                         $tm= $data[1]*1000;
                         if($updateVersion > 50) {
-                            $renderer->doc .= '<span id = "goto_go">'.$url .';'.$tm.'</span>';
+                            $renderer->doc .= '<span id="goto_go" style="display:none;">'.$url.';'.$tm.'</span>';
                         }
                         else {
                             $renderer->doc .= "<script>var goto_tm= setTimeout(function(){goto_redirect('$url', '$data[4]');},$tm);</script>";
