@@ -7,25 +7,23 @@
  *@author    Myron Turner <turnermm02@shaw.ca> 
 */
 
-if(!defined('DOKU_INC')) define('DOKU_INC',realpath(dirname(__FILE__).'/../../').'/');
-if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
-require_once(DOKU_PLUGIN.'syntax.php');
+use dokuwiki\Extension\SyntaxPlugin;
 
-class  syntax_plugin_goto extends DokuWiki_Syntax_Plugin {
+class syntax_plugin_goto extends SyntaxPlugin {
 
-	function getType(){
+	public function getType(){
 		return('substition');
 		}
 
-		function connectTo($mode) {
+		public function connectTo($mode) {
 			$this->Lexer->addSpecialPattern('(?i)~~GOTO>.+?~~',$mode,'plugin_goto');
 			}
 
-			function getSort() {
+			public function getSort() {
 				return 249;
 			}
 
-			function handle($match, $state, $pos, Doku_Handler $handler){
+			public function handle($match, $state, $pos, Doku_Handler $handler){
                  global $INPUT;
 				 $userid = $INPUT->server->str('REMOTE_USER');
                  $is_usr = false;
@@ -63,7 +61,7 @@ class  syntax_plugin_goto extends DokuWiki_Syntax_Plugin {
 				return array($matches[0], $seconds, $message,$is_usr,$is_extern);
 			}
 
-             function render($mode, Doku_Renderer $renderer, $data) {
+             public function render($mode, Doku_Renderer $renderer, $data) {
                 if($mode != 'xhtml') return false;
                 global $updateVersion;              
                 global $ACT;

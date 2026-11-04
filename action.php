@@ -3,20 +3,21 @@
  *@author    Myron Turner <turnermm02@shaw.ca> 
  */
  
-if(!defined('DOKU_INC')) define('DOKU_INC',realpath(dirname(__FILE__).'/../../../').'/');
-if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
-require_once(DOKU_PLUGIN.'action.php');
-class action_plugin_goto extends DokuWiki_Action_Plugin {
-    public function register(Doku_Event_Handler $controller) {   
+use dokuwiki\Extension\ActionPlugin;
+use dokuwiki\Extension\EventHandler;
+use dokuwiki\Extension\Event;
+
+class action_plugin_goto extends ActionPlugin {
+    public function register(EventHandler $controller) {   
 	  $controller->register_hook('ACTION_ACT_PREPROCESS', 'BEFORE', $this, 'handle_act',array('before')); 
       $controller->register_hook('DOKUWIKI_STARTED', 'AFTER', $this, 'started',array('after'));
     }
-	function started(Doku_Event $event, $param) {
+	public function started(Event $event, $param) {
         global $JSINFO,$updateVersion;
         $JSINFO['update_version'] = $updateVersion;        
     }
 
-	function handle_act(Doku_Event $event, $param) {   	   
+	public function handle_act(Event $event, $param) {   	   
 	   global $conf,$USERINFO,$INPUT;
 		$act = act_clean($event->data);
 		 if($act != 'login') {
