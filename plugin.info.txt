@@ -1,7 +1,7 @@
 base goto
-author Allen Ormond,cziehr, turnermm
+author Allen Ormond, cziehr, turnermm
 email info@einsatzleiterwiki.de
-date 2026-10-25
+date 2026-11-04
 name GOTO
 desc Easily redirect to other pages in your wiki.
 url https://www.dokuwiki.org/plugin:goto
